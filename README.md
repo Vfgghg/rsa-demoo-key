@@ -2,9 +2,10 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+
 using System.Text;
 
-namespace ConsoleApp2 
+namespace RES_LEARN 
 {
     class Program
     {
@@ -12,20 +13,19 @@ namespace ConsoleApp2
         static void Main(string[] args)
         {
             // Specify the paths to your certificate files
-            // Specify the paths to your certificate files
-            string publicKeyCertificatePath = "C:\\Users\\lenovo\\Downloads\\publicKey.cer";
-            string privateKeyCertificatePath = "C:\\Users\\lenovo\\Downloads\\certificates.pfx";
-            string privateKeyCertificatePassword = "marwadi"; // Password for the private key certificate
+            string publicKeyCertificatePath = "H:\\Temporary\\Vaibhav.Soni\\Marwadi\\server\\public.cer";
+            string privateKeyCertificatePath = "H:\\Temporary\\Vaibhav.Soni\\Marwadi\\server\\private.pfx";
+            string privateKeyCertificatePassword = "marwadi";
 
             // Load public key certificate
-            X509Certificate2 publicKeyCertificate = new X509Certificate2("C:\\Users\\lenovo\\Downloads\\publicKey.cer");
+            X509Certificate2 publicKeyCertificate = new X509Certificate2("H:\\Temporary\\Vaibhav.Soni\\Marwadi\\server\\public.cer");
 
             // Load private key certificate
-            X509Certificate2 privateKeyCertificate= new X509Certificate2("C:\\Users\\lenovo\\Downloads\\certificates.pfx", "marwadi", X509KeyStorageFlags.Exportable);
+            X509Certificate2 privateKeyCertificate = new X509Certificate2("H:\\Temporary\\Vaibhav.Soni\\Marwadi\\server\\private.pfx","test@123", X509KeyStorageFlags.Exportable| X509KeyStorageFlags.MachineKeySet);
 
-            // Extract RSA parameters from certificate5555555555555555555555s
+            // Extract RSA parameters from certificate
             RSAParameters publicKeyParameters = ((RSA)publicKeyCertificate.GetRSAPublicKey()).ExportParameters(false);
-            RSAParameters privateKeyParameters = ((RSA)privateKeyCertificate.GetRSAPrivateKey().Decrypt);
+            RSAParameters privateKeyParameters = ((RSA)privateKeyCertificate.GetRSAPrivateKey()).ExportParameters(true);
 
 
             string publicKeyString = GetKeyString(publicKeyParameters);
@@ -96,4 +96,6 @@ namespace ConsoleApp2
             return sb.ToString();
         }
     }
+
 }
+
